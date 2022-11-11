@@ -7,10 +7,9 @@ import java.time.LocalDate;
 
 @Data
 public class Film {
-    private Integer id;
-    private String name;
-    private String description;
-    private LocalDate releaseDate;
-    private int duration;
-
+    private final Integer id; //should I generate id?
+    private final String name;
+    private final String description;
+    private final LocalDate releaseDate;
+    private final int duration;
 }
