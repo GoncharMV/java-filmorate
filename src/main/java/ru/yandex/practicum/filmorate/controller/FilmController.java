@@ -2,9 +2,10 @@ package ru.yandex.practicum.filmorate.controller;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
-import ru.yandex.practicum.filmorate.exceptions.ValidationException;
+import ru.yandex.practicum.filmorate.exception.ValidationException;
 import ru.yandex.practicum.filmorate.model.Film;
 
+import javax.validation.Valid;
 import java.time.LocalDate;
 import java.util.*;
 
@@ -12,8 +13,8 @@ import java.util.*;
 @Slf4j
 public class FilmController {
     Map<Integer, Film> films = new HashMap<>();
-    private final static String FILM_STR = "Film";
-    private final static String INVALID_STR = "invalid";
+    private static final String FILM_STR = "Film";
+    private static final String INVALID_STR = "invalid";
 
     @GetMapping("/films")
     public Collection<Film> findAllFilms() {
@@ -21,8 +22,8 @@ public class FilmController {
     }
 
     @PostMapping("/films")
-    public Film postFilm(@RequestBody Film film) {
-        isFilmValid(film);
+    public Film postFilm(@Valid @RequestBody Film film) {
+        isFilmReleaseDateValid(film);
         film.setId(films.size() + 1);
         films.put(film.getId(), film);
         log.info("Film amount: {}", films.size());
@@ -30,8 +31,8 @@ public class FilmController {
     }
 
     @PutMapping("/films")
-    public Film updateFilm(@RequestBody Film film) {
-        isFilmValid(film);
+    public Film updateFilm(@Valid @RequestBody Film film) {
+        isFilmReleaseDateValid(film);
         if (!films.containsKey(film.getId())) {
             throw new ValidationException(FILM_STR + " id " + INVALID_STR);
         }
@@ -40,19 +41,9 @@ public class FilmController {
         return film;
     }
 
-    private void isFilmValid(Film film) {
-        if (film.getName().isBlank() || film.getName() == null) {
-            throw new ValidationException(FILM_STR + " name " + INVALID_STR);
-        }
-        if (film.getDescription().length() > 200) {
-            throw new ValidationException(FILM_STR + " description " + INVALID_STR);
-        }
+    private void isFilmReleaseDateValid(Film film) {
         if (film.getReleaseDate().isBefore(LocalDate.of(1895,12,28))) {
             throw new ValidationException(FILM_STR + " release date " + INVALID_STR);
         }
-        if (film.getDuration() <= 0) {
-            throw new ValidationException(FILM_STR + " duration " + INVALID_STR);
-        }
-
     }
 }
