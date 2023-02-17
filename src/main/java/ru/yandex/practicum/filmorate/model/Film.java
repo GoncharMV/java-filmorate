@@ -22,19 +22,5 @@ import java.util.Set;
         private final int duration;
         @JsonIgnore
         private Set<Long> likes = new HashSet<>();
-        @JsonIgnore
-        private long rate = 0;
-
-        public void addLike(Long userId) {
-            likes.add(userId);
-            rate = likes.size();
-        }
-
-        public void removeLike(Long userId) {
-            if (!likes.contains(userId)) {
-                throw new IllegalArgumentException();
-            }
-            likes.remove(userId);
-            rate = likes.size();
-        }
+        private int rate = 0;
     }

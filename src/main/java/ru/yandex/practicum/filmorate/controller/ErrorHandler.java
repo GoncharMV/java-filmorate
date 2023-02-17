@@ -13,6 +13,6 @@ public class ErrorHandler {
     @ExceptionHandler
     @ResponseStatus(HttpStatus.NOT_FOUND)
     public Map<String, String> handleNegativeId(final IllegalArgumentException e) {
-        return Map.of("error", "передан отрицательный id");
+        return Map.of("error", "id does not exist");
     }
 }
