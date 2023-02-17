@@ -20,9 +20,9 @@ import java.util.Set;
         private final LocalDate releaseDate;
         @PositiveOrZero(message = "duration should not be negative")
         private final int duration;
-    //    @JsonIgnore
+        @JsonIgnore
         private Set<Long> likes = new HashSet<>();
-     //   @JsonIgnore
+        @JsonIgnore
         private long rate = 0;
 
         public void addLike(Long userId) {
@@ -31,6 +31,9 @@ import java.util.Set;
         }
 
         public void removeLike(Long userId) {
+            if (!likes.contains(userId)) {
+                throw new IllegalArgumentException();
+            }
             likes.remove(userId);
             rate = likes.size();
         }

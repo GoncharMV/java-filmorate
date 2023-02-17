@@ -17,6 +17,9 @@ public class InMemoryUserStorage implements UserStorage {
 
     @Override
     public User get(Long id) {
+        if (!users.containsKey(id)) {
+            throw new IllegalArgumentException();
+        }
         return users.get(id);
     }
 
@@ -37,11 +40,10 @@ public class InMemoryUserStorage implements UserStorage {
 
     @Override
     public void delete(Long id) {
+        if (!users.containsKey(id)) {
+            throw new IllegalArgumentException();
+        }
         users.remove(id);
-    }
-
-    public void validation() {
-
     }
 
     private Long generateId() {
@@ -54,5 +56,4 @@ public class InMemoryUserStorage implements UserStorage {
             user.setName(user.getLogin());
         }
     }
-
 }

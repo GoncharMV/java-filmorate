@@ -1,7 +1,6 @@
 package ru.yandex.practicum.filmorate.storage;
 
 import java.util.Collection;
-import java.util.Set;
 
 public interface Storage<T> {
 
@@ -11,3 +10,10 @@ public interface Storage<T> {
     T update(T data);
     void delete(Long id);
 }
+
+/*
+Здравстуй! Я сделала общий интерфейс хранилища, потому что у user and film по сути одинаковые методы.
+И я хотела сделать их реализацию в одном абстрактном классе, но не смогла сообразить, как в таком случае генерировать id
+потому что сейчас они генерируются в хранилищах тупо по размеру мапы, но это мне кажется не очень хороший вариант.
+Мб можешь подсказать что?
+ */

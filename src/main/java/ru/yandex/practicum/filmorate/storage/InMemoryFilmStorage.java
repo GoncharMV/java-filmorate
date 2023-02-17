@@ -19,6 +19,9 @@ public class InMemoryFilmStorage implements FilmStorage {
 
     @Override
     public Film get(Long id) {
+        if (!films.containsKey(id)) {
+            throw new IllegalArgumentException();
+        }
         return films.get(id);
     }
 
@@ -31,12 +34,18 @@ public class InMemoryFilmStorage implements FilmStorage {
 
     @Override
     public Film update(Film film) {
+        if (!films.containsKey(film.getId())) {
+            throw new IllegalArgumentException();
+        }
         films.replace(film.getId(), film);
         return film;
     }
 
     @Override
     public void delete(Long id) {
+        if (!films.containsKey(id)) {
+            throw new IllegalArgumentException();
+        }
         films.remove(id);
     }
 

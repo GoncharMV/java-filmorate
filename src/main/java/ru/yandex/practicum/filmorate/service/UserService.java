@@ -66,6 +66,10 @@ public class UserService {
         return userStorage.update(user);
     }
 
+    public void deleteUser(Long id) {
+        userStorage.delete(id);
+    }
+
     public void deleteFriend(Long id, Long friendId) {
         removeFromFriendList(id, friendId);
         removeFromFriendList(friendId, id);
