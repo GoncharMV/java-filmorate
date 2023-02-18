@@ -13,7 +13,7 @@ public class ValidationTests {
     @Test
     @DisplayName("User invalid login")
     void userWithNullLoginTest(){
-        user = new User("email@mail.ru", null, LocalDate.of(2000, 11, 11));
+        user = new User("", "email@mail.ru", LocalDate.of(2000, 11, 11));
         Assertions.assertTrue(ValidationTestUtils.errorMessage(user,"login should not be null or blank"));
     }
 
