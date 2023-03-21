@@ -38,8 +38,7 @@ public class FilmService {
     }
 
     public Collection<Film> getPopular(int count) {
-        Collection<Film> collect = filmStorage.getPopular(count);
-        return collect;
+        return filmStorage.getPopular(count);
     }
 
     public void addLike(Long filmId, Long userId) {
