@@ -1,13 +1,11 @@
 package ru.yandex.practicum.filmorate.storage;
 
-import org.springframework.stereotype.Component;
 import ru.yandex.practicum.filmorate.model.Film;
 
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
-@Component
 public class InMemoryFilmStorage implements FilmStorage {
 
     private final Map<Long, Film> films = new HashMap<>();
@@ -51,5 +49,10 @@ public class InMemoryFilmStorage implements FilmStorage {
 
     private Long generateId() {
         return (long) films.size() + 1;
+    }
+
+    @Override
+    public Collection<Film> getPopular(int count) {
+        return null;
     }
 }
